@@ -1,3 +1,4 @@
+// Toggle menu for mobile view
 let menuOpen = false;
 
 function toggleMenu() {
@@ -220,3 +221,4 @@ window.addEventListener("load", () => {
     openHelp();
     renderQueue();
 });
+
