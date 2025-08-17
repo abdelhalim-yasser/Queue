@@ -17,9 +17,9 @@ This project implements a **simple queue** data structure using a fixed-size int
 ### 🧱 Queue Basics
 - `createQueue(Queue* queue)`: Initialize an empty queue.
 - `enqueue(int data, Queue* queue)`: Add an element to the rear of the queue.
-- `dequeue(Queue* queue)`: Remove and return the front element.
+- `dequeue(Queue* queue)`: Remove and return the front element (returns `-1` if empty; check `isEmpty` first).
 - `clear(Queue* queue)`: Remove all elements from the queue.
-- `peek(Queue* queue)`: Return the front element without removing it.
+- `peek(Queue* queue)`: Return the front element without removing it (returns `-1` if empty; check `isEmpty` first).
 - `isEmpty(Queue* queue)`: Check if the queue is empty.
 - `isFull(Queue* queue)`: Check if the queue is full.
 - `printQueue(Queue* queue)`: Print all elements in order (front to rear).
@@ -55,7 +55,7 @@ int main() {
 
 ## 🧱 Algorithm Steps
 
-1. Create a fixed-size array to hold elements.
+1. Define a `Queue` struct with a fixed-size array, `front`, `rear`, `size`, and `capacity`.
 2. Track front, rear, and size for queue operations.
 3. Implement enqueue by adding elements at rear.
 4. Implement dequeue by removing elements from front.
@@ -74,6 +74,7 @@ int main() {
 
 ## 🧾 Notes
 
+- The queue has a fixed capacity of 100 elements, defined by `MAX_SIZE` in `Queue.c`. For dynamic sizing, consider a custom implementation.
 - This queue uses a fixed-size array and is not circular, so space is not reused after dequeuing.
 - It is limited to INTEGER values only (not generic).
 - All operations are iterative for simplicity and performance.
