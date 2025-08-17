@@ -3,7 +3,7 @@ import java.util.Random;
 
 
 // Circular Queue Class
-class CircularQueue {
+public class CircularQueue {
 	protected int size;
 	protected int rear;
 	protected int front;
