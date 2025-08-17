@@ -4,15 +4,15 @@
 
 ## 🚀 Implementations
 
-- **[Queue in C](https://github.com/abdelhalimYasser/Queue/tree/main/Implementation%20in%20C)**
-- **[Queue in Java](https://github.com/abdelhalimYasser/Queue/tree/main/Implementation%20in%20Java)**
+- **[Queue in C](https://github.com/abdelhalimYasser/Queue/tree/b70946291db3ea963ff7962d8437a370a122b50f/Queue/Implementation%20in%20C)**
+- **[Queue in Java](https://github.com/abdelhalimYasser/Queue/tree/b70946291db3ea963ff7962d8437a370a122b50f/Queue/Implementation%20in%20Java)**
 
 ---
 
 ## 🌐 Try it Online
 
 You can try the **interactive queue visualization** here:  
-👉 **[Live Demo](https://abdelhalim-yasser.github.io/Queue/)**
+👉 **[Live Demo](https://abdelhalimYasser.github.io/Queue/)**
 
 ---
 
