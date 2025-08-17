@@ -66,7 +66,7 @@ System.out.println("Is queue full? " + queue.isFull());    // Output: false
 - It is limited to INTEGER values only (not generic).
 - All operations are iterative for simplicity and performance.
 - Useful for educational purposes and basic queue applications.
-- For more functions and methods you can checkout the other implementations [Circular Queue](https://github.com/abdelhalimYasser/Queue/tree/312eedffde383a642eebb5749152fe9a45e47782/Circular%20Queue) or [Double Ended Queue(Deque)](https://github.com/abdelhalimYasser/Queue/tree/312eedffde383a642eebb5749152fe9a45e47782/Double%20Ended%20Queue(Deque))
+- For more functions and methods you can checkout the other implementations [Circular Queue](https://github.com/abdelhalimYasser/Queue/tree/8e42d94f9d38fe8ad611c5a911b5ebe333d3a8fd/Circular%20Queue/Implementation%20in%20Java) or [Double Ended Queue(Deque)](https://github.com/abdelhalimYasser/Queue/tree/8e42d94f9d38fe8ad611c5a911b5ebe333d3a8fd/Double%20Ended%20Queue(Deque)/Implementation%20in%20Java)
   
 ---
 
