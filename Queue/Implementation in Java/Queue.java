@@ -3,7 +3,7 @@ package mypackage;
 
 // Implementation of the Queue
 public class Queue {
-	protected int[] arr;
+	protected int[] array;
 	protected int capacity;
 	protected int front;
 	protected int rear;
@@ -12,7 +12,7 @@ public class Queue {
 	// Constructor that defines the Queue
 	public Queue(int capacity) {
 		this.capacity = capacity;
-		arr = new int[capacity];
+		this.array = new int[capacity];
 		front = 0;
 		rear = -1;
 		size = 0;
@@ -28,7 +28,7 @@ public class Queue {
 		}
 
 		rear++;
-		arr[rear] = data;
+		array[rear] = data;
 		size++;
 	}
 
@@ -39,7 +39,7 @@ public class Queue {
 			return -1;
 		}
 
-		int data = arr[front];
+		int data = array[front];
 		front++;
 		size--;
 		return data;
@@ -56,15 +56,15 @@ public class Queue {
 		if (isEmpty())
 			return -1;
 
-		return arr[front];
+		return array[front];
 	}
 
-	// Check if queue is full
+	// Queue isFull function to check if queue is full
 	public boolean isFull() {
 		return size == capacity;
 	}
 
-	// Check if queue is empty
+	// Queue isEmpty function to check if queue is empty
 	public boolean isEmpty() {
 		return size == 0;
 	}
@@ -77,7 +77,7 @@ public class Queue {
 
 		System.out.print("Queue elements: ");
 		for (int i = front; i <= rear; i++) {
-			System.out.print(arr[i] + " ");
+			System.out.print(array[i] + " ");
 		}
 		System.out.println();
 	}
