@@ -75,10 +75,7 @@ public class Queue {
 		if (isEmpty())
 			return;
 
-		System.out.print("Queue elements: ");
-		for (int i = front; i <= rear; i++) {
-			System.out.print(array[i] + " ");
-		}
-		System.out.println();
+		for (int i = front; i <= rear; i++)
+			System.out.print("[" + i + "]" + " -> " + array[i]);	
 	}
 }
