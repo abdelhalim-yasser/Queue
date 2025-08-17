@@ -1,5 +1,14 @@
 #ifndef QUEUE_H_INCLUDED
 #define QUEUE_H_INCLUDED
+#define CAPACITY 10
+
+
+typedef struct {
+	int front;
+	int rear;
+	int size;
+	int array[CAPACITY];
+} Queue;
 
 
 // Queue Basic Functions
