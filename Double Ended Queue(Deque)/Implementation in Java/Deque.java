@@ -1,5 +1,8 @@
+package mypackage;
+
+
 // Implementation of Deque using circular array
-class Deque {
+public class Deque {
 	protected int size;            // The size index of the Deque
 	protected int rear;           // The rear of the Deque
 	protected int front;         // The front of the Deque
@@ -271,7 +274,10 @@ class Deque {
 		
 		for(int i = 0; i < (size / 2); i++){
 		    int index = (front + i) % capacity;
-		    
+		    int index2 = (rear - i + size) % capacity;
+		    int temp = array[index];
+			array[index] = array[index2];
+			array[index2] = temp;
 		}
 	}
 
@@ -306,5 +312,144 @@ class Deque {
 	public void randomize() {
 		if(size == 0)
 			return;
+			
+		Random rand = new Random();
+		
+		for(int i = size; i > 0; i--){
+		    int j = rand.nextInt(i + 1);
+		    index = (front + i) % capacity;
+		    randIndex = (front + j) % capacity;
+		    int temp = array[index1];
+			array[index1] = array[index2];
+			array[index2] = temp;
+		}
+	}
+	
+	// Deque swapData to swap two elements in the Queue
+	public void swapData(int data1, int data2){
+	    if(size == 0)
+	        return;
+
+		int index1 = -1;
+		int index2 = -1;
+
+		for(int i = 0; i < size; i++) {
+			int index = (front + i) % size;
+			if(data1 == array[index])
+				index1 = index;
+			else if(data2 == array[index])
+				index2 = index;
+		}
+
+		if(index1 != -1 && index2 != -1) {
+			int temp = array[index1];
+			array[index1] = array[index2];
+			array[index2] = temp;
+			return;
+		}
+		else
+			return;     
+	}
+	
+	// Deque swapindex to swap the elements in the given index in the Queue
+	public void swapindex(int index1, int index2){
+	    if(size == 0)
+	        return;
+
+	    if (index1 < 0 && index1 >= getSize() || index2 < 0 && index2 >= getSize()) {
+			System.out.println("Index out of boundries.");
+			return;
+		}
+
+		int temp = array[index1];
+		array[index1] = array[index2];
+		array[index2] = temp;
+	}
+	
+	
+	
+	// Extra Operations
+	// Deque clone function to return clone of the Deque
+	public Deque clone(Deque deque) {
+		if (size == 0)
+		  System.exit(0);
+
+		Deque copy = new Deque(capacity);
+
+		for(int i = 0; i < size; i++){
+		    int index = (front + i) % capacity;
+			deque.insertFront(array[index]);
+		}	
+
+		return copy;
+	}
+
+	// Deque equals function to check if the two Queues are equal or not
+	public boolean equals(Deque deque) {
+		if (this.size == 0 || deque.size == 0) {
+			System.out.println("One or both of two Deques is empty");
+			System.exit(0);
+		}
+
+		if (this.size != deque.size)
+			return false;
+
+		for(int i = 0; i <= top; i++){
+		    int index = (front + i) % capacity;
+			if(this.array[index] != deque.array[index])
+				return false;
+		}		
+
+		return true;
+	}
+
+	// Deque concat function to append another deque to the current one
+	public Deque concat(Deque deque) {
+		if (this.size == 0 && deque.size == 0) {
+			System.out.println("One or both of two Queues is empty");
+			System.exit(0);
+		}
+
+		Deque copy = new Deque((this.size + deque.size));
+
+		for(int i = 0; i < size; i++){
+		    int index = (front + i) % capacity;
+		    copy.insertFront(this.array[index]);
+		}
+
+		for(int i = 0; i <= size; i++){
+		    int index = (front + i) % capacity;
+		    copy.insertFront(deque.array[index]);
+		}	
+
+		return copy;
+	}
+
+
+
+	// Conversion functions
+	// Deque toArray function to convert the Deque into array
+	public int[] toArray() {
+		int[] result = new int[size + 1];
+
+		for (int i = 0; i <= top; i++){
+		    int index = (front + i) % capacity;
+			result[index] = array[index];
+		}
+		
+		return result;
+	}
+
+	// Deque toDeque function to convert array into Deque
+	public Deque toDeque(int[] array) {
+		Deque deque = new deque(array.length);
+
+		for(int i = 0; i < array.length; i++){
+		    int index = (front + i) % capacity;
+		    deque.insertFront(array[index]);
+		}
+			
+
+		return deque;
 	}
 }
