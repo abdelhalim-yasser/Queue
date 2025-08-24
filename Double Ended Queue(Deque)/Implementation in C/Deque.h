@@ -2,6 +2,8 @@
 #define DEQUE_H_INCLUDED
 #define CAPACITY 10
 
+
+
 // Implementation of Deque using circular array
 // Define the Deque
 typedef struct{
@@ -110,6 +112,16 @@ void swapData(Deque* deque, int data1, int data2);
 
 // Deque swapIndex to swap the elements in the given index in the Queue
 void swapIndex(Deque* deque, int index1, int index2);
+
+
+
+
+// Extra Operations
+// Deque equals function to check if the deque are equal or not
+bool equals(Deque* deque1, Deque* deque2);
+
+// Concatenate deque2 to deque1 (modifies deque1)
+bool concat(Deque* deque1, Deque* deque2);
 
 
 
