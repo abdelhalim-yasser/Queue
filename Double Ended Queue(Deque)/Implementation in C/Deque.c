@@ -2,17 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-#define CAPACITY 10
-
-// Implementation of Deque using circular array
-// Define the Deque
-typedef struct {
-	int front;                // The front of the Deque
-	int rear;                // The rear of the Deque
-	int size;               // The size index of the Deque
-	int array[CAPACITY];   // The circular array of the Deque
-} Deque;
-
+#include "Deque.h"
 
 
 // Create the Deque
@@ -34,7 +24,7 @@ void insertFront(Deque* deque, int data) {
 	}
 
 	if(deque->size == 0)
-		deque->front++;
+		deque->front = 0;
 	else
 		deque->front = (deque->front + CAPACITY - 1) % CAPACITY;
 
@@ -149,10 +139,10 @@ bool isFound(Deque* deque, int data) {
 	for(int i = 0; i < deque->size; i++) {
 		int index = (deque->front + i) % CAPACITY;
 		if(deque->array[index] != data)
-			return false;
+			return true;
 	}
 
-	return true;
+	return false;
 }
 
 // Deque getIndex function to get the index of specific element
@@ -231,7 +221,7 @@ float average(Deque* deque) {
 // Deque repeated function to return number of repetion of num in the Queue
 int repeated(Deque* deque, int data) {
 	if(deque->size == 0)
-		return -999;
+		return -1;
 
 	int count = 0;
 
@@ -295,18 +285,18 @@ void printDeque(Deque* deque) {
 
 // Deque sort function to sort the Queue
 void sort(Deque* deque) {
-	if(deque->size == 0)
+	if (deque->size <= 1)
 		return;
 
 	bool swapped;
 
-	for(int i = 0; i < deque->size; i++) {
+	for (int i = 0; i < deque->size - 1; i++) {
 		swapped = false;
-		for(int j = 0; j < deque->size - i; i++) {
+		for (int j = 0; j < deque->size - i - 1; j++) {
 			int index = (deque->front + j) % CAPACITY;
 			int nextIndex = (deque->front + j + 1) % CAPACITY;
 
-			if(deque->array[nextIndex] > deque->array[index]) {
+			if (deque->array[index] > deque->array[nextIndex]) {
 				int temp = deque->array[index];
 				deque->array[index] = deque->array[nextIndex];
 				deque->array[nextIndex] = temp;
@@ -314,34 +304,35 @@ void sort(Deque* deque) {
 			}
 		}
 
-		if(!swapped)
+		if (!swapped)
 			break;
 	}
 }
 
 // Deque removeDuplicates function to remove the duplictaes in the Queue
 void removeDuplicates(Deque* deque) {
-    if (deque->size <= 1) {
-        return;
-    }
-    
-    sort(deque);
-    int temp[CAPACITY];
-    int j = 0;
-    temp[j] = deque->array[deque->front];
-    j++;
-    
-    for (int i = 1; i < deque->size; i++) {
-        int index = (deque->front + i) % CAPACITY;
-        if (deque->array[index] != temp[j - 1]) {
-            temp[j++] = deque->array[index];
-        }
-    }
-    
-    clear(deque);
-    
-    for (int i = 0; i < j; i++)
-        insertRear(deque, temp[i]);
+	if (deque->size <= 1) {
+		return;
+	}
+
+	sort(deque);
+
+	int temp[CAPACITY];
+	int j = 0;
+	temp[j] = deque->array[deque->front];
+	j++;
+
+	for (int i = 1; i < deque->size; i++) {
+		int index = (deque->front + i) % CAPACITY;
+		if (deque->array[index] != temp[j - 1]) {
+			temp[j++] = deque->array[index];
+		}
+	}
+
+	clear(deque);
+
+	for (int i = 0; i < j; i++)
+		insertRear(deque, temp[i]);
 }
 
 // Deque reverse function to reverse the Queue
@@ -349,165 +340,98 @@ void reverse(Deque* deque) {
 	if(deque->size == 0)
 		return;
 
-	for(int i = 0; i < (deque->size) / 2; i++){
-	    int index = (deque->front + i) % CAPACITY;
-	    int index2 = (deque->rear + CAPACITY - i) % CAPACITY;
-	    int temp = deque->array[index];
-	    deque->array[index] = deque->array[index2];
-	    deque->array[index2] = temp;
+	for(int i = 0; i < (deque->size) / 2; i++) {
+		int index = (deque->front + i) % CAPACITY;
+		int index2 = (deque->rear - i + CAPACITY) % CAPACITY;
+		int temp = deque->array[index];
+		deque->array[index] = deque->array[index2];
+		deque->array[index2] = temp;
 	}
-	
+
 }
 
 // Deque randomize to randomize the Queue
 void randomize(Deque* deque) {
-    if(deque->size == 0)
-        return;
-    
-    srand(time(NULL));
-    
-    for (int i = deque->size - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        int index = (deque->front + i) % CAPACITY;
-        int randIndex = (deque->front + j) % CAPACITY;
-        int temp = deque->array[index];
-        deque->array[index] = deque->array[randIndex];
-        deque->array[randIndex] = temp;
-    }   
+	if(deque->size == 0)
+		return;
+
+	srand(time(NULL));
+
+	for (int i = deque->size - 1; i > 0; i--) {
+		int j = rand() % (i + 1);
+		int index = (deque->front + i) % CAPACITY;
+		int randIndex = (deque->front + j) % CAPACITY;
+		int temp = deque->array[index];
+		deque->array[index] = deque->array[randIndex];
+		deque->array[randIndex] = temp;
+	}
 }
 
 // Deque swapData to swap two elements in the Queue
-bool swapData(Deque* deque, int data1, int data2) {
-    if (deque->size == 0) {
-        return false;
-    }
-    int index1 = -1, index2 = -1;
-    for (int i = 0; i < deque->size; i++) {
-        int index = (deque->front + i) % CAPACITY;
-        if (deque->array[index] == data1 && index1 == -1) {
-            index1 = index;
-        } else if (deque->array[index] == data2 && index2 == -1) {
-            index2 = index;
-        }
-    }
-    if (index1 == -1 || index2 == -1) {
-        return false;
-    }
-    int temp = deque->array[index1];
-    deque->array[index1] = deque->array[index2];
-    deque->array[index2] = temp;
-    return true;
+void swapData(Deque* deque, int data1, int data2) {
+	if (deque->size == 0)
+		return;
+
+	int index1 = -1;
+	int index2 = -1;
+
+	for (int i = 0; i < deque->size; i++) {
+		int index = (deque->front + i) % CAPACITY;
+		if (deque->array[index] == data1 && index1 == -1)
+			index1 = index;
+		else if (deque->array[index] == data2 && index2 == -1)
+			index2 = index;
+	}
+
+	if (index1 == -1 || index2 == -1)
+		return;
+
+	int temp = deque->array[index1];
+	deque->array[index1] = deque->array[index2];
+	deque->array[index2] = temp;
 }
 
 // Deque swapIndex to swap the elements in the given index in the Queue
-bool swapIndex(Deque* deque, int index1, int index2) {
-    if (deque->size == 0 || index1 < 0 || index1 >= deque->size || index2 < 0 || index2 >= deque->size)
-        return false;
- 
-    int physicalIndex1 = (deque->front + index1) % CAPACITY;
-    int physicalIndex2 = (deque->front + index2) % CAPACITY;
-    
-    int temp = deque->array[physicalIndex1];
-    deque->array[physicalIndex1] = deque->array[physicalIndex2];
-    deque->array[physicalIndex2] = temp;
-    return true;
+void swapIndex(Deque* deque, int index1, int index2) {
+	if (deque->size == 0 || index1 < 0 || index1 >= deque->size || index2 < 0 || index2 >= deque->size)
+		return;
+
+	int physicalIndex1 = (deque->front + index1) % CAPACITY;
+	int physicalIndex2 = (deque->front + index2) % CAPACITY;
+
+	int temp = deque->array[physicalIndex1];
+	deque->array[physicalIndex1] = deque->array[physicalIndex2];
+	deque->array[physicalIndex2] = temp;
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-int main()
-{
-	Deque deque;
-    createDeque(&deque);
-    printf("=== Testing Basic Operations ===\n");
+// Extra Operations
+// Deque equals function to check if the deque are equal or not
+bool equals(Deque* deque1, Deque* deque2){
+    if(deque1->size != deque2->size || deque1->size == 0 || deque2->size == 0)
+        return false;
+        
+    for(int i = 0; i < deque1->size; i++){
+        int index1 = (deque1->front + i) % CAPACITY;
+        int index2 = (deque2->front + i) % CAPACITY;
+        if (deque1->array[index1] != deque2->array[index2])
+            return false;
+    }
     
-    // Test insertions
-    insertRear(&deque, 10);
-    insertRear(&deque, 20);
-    insertFront(&deque, 30);
-    insertFront(&deque, 40);
-    printDeque(&deque);  // Expected: Deque elements: 40 30 10 20
-    printf("Size: %d\n", getSize(&deque));  // Expected: 4
-    printf("Is empty? %d\n", isEmpty(&deque));  // Expected: 0
-    printf("Is full? %d\n", isFull(&deque));    // Expected: 0
+    return true;    
+}
+
+// Concatenate deque2 to deque1 (modifies deque1)
+bool concat(Deque* deque1, Deque* deque2) {
+    if (deque1->size + deque2->size > CAPACITY)
+        return false;
     
-    // Test deletions
-    printf("Delete front: %d\n", deleteFront(&deque));  // Expected: 40
-    printf("Delete rear: %d\n", deleteRear(&deque));    // Expected: 20
-    printDeque(&deque);  // Expected: Deque elements: 30 10
-    printf("Size: %d\n", getSize(&deque));  // Expected: 2
+    for (int i = 0; i < deque2->size; i++) {
+        int index = (deque2->front + i) % CAPACITY;
+        insertRear(deque1, deque2->array[index]);
+    }
     
-    // Test clear
-    clear(&deque);
-    printDeque(&deque);  // Expected: Deque is empty
-    printf("Is empty? %d\n", isEmpty(&deque));  // Expected: 1
-
-    printf("\n=== Testing Search Operations ===\n");
-    insertRear(&deque, 10);
-    insertRear(&deque, 20);
-    insertRear(&deque, 10);
-    printDeque(&deque);  // Expected: Deque elements: 10 20 10
-    printf("Front: %d\n", getFront(&deque));     // Expected: 10
-    printf("Rear: %d\n", getRear(&deque));       // Expected: 10
-    printf("Middle: %d\n", getMiddle(&deque));   // Expected: 20
-    printf("Is 20 found? %d\n", isFound(&deque, 20));  // Expected: 1
-    printf("Is 50 found? %d\n", isFound(&deque, 50));  // Expected: 0
-    printf("Index of 20: %d\n", getIndex(&deque, 20)); // Expected: 1
-    printf("Element at index 1: %d\n", getElement(&deque, 1)); // Expected: 20
-    printf("Element at invalid index: %d\n", getElement(&deque, 5)); // Expected: Invalid index, -1
-
-    printf("\n=== Testing Statistics ===\n");
-    printf("Sum: %d\n", sum(&deque));             // Expected: 40
-    printf("Average: %.2f\n", average(&deque));   // Expected: 13.33
-    printf("Repeated 10: %d\n", repeated(&deque, 10)); // Expected: 2
-    printf("Max: %d\n", max(&deque));             // Expected: 20
-    printf("Min: %d\n", min(&deque));             // Expected: 10
-
-    printf("\n=== Testing Utilities ===\n");
-    removeDuplicates(&deque);
-    printDeque(&deque);  // Expected: Deque elements: 10 20
-    reverse(&deque);
-    printDeque(&deque);  // Expected: Deque elements: 20 10
-    sort(&deque);
-    printDeque(&deque);  // Expected: Deque elements: 10 20
-    printf("Swap data 10 and 20: %d\n", swapData(&deque, 10, 20)); // Expected: 1
-    printDeque(&deque);  // Expected: Deque elements: 20 10
-    printf("Swap indices 0 and 1: %d\n", swapIndex(&deque, 0, 1)); // Expected: 1
-    printDeque(&deque);  // Expected: Deque elements: 10 20
-    randomize(&deque);
-    printf("After randomize:\n");
-    printDeque(&deque);  // Expected: Random order (e.g., 20 10 or 10 20)
-
-    printf("\n=== Testing Edge Cases ===\n");
-    clear(&deque);
-    printDeque(&deque);  // Expected: Deque is empty
-    printf("Delete front on empty: %d\n", deleteFront(&deque)); // Expected: Deque Underflow, -1
-    Deque fullDeque;
-    createDeque(&fullDeque);
-    insertRear(&fullDeque, 1);
-    insertRear(&fullDeque, 2);
-    insertRear(&fullDeque, 3);
-    insertRear(&fullDeque, 4);
-    insertRear(&fullDeque, 5);
-    insertRear(&fullDeque, 6);
-    insertRear(&fullDeque, 7);
-    insertRear(&fullDeque, 8);
-    insertRear(&fullDeque, 9);
-    insertRear(&fullDeque, 10);
-    printf("Is full? %d\n", isFull(&fullDeque)); // Expected: 1
-    insertRear(&fullDeque, 11); // Expected: Deque Overflo
-
-	return 0;
+    return true;
 }
