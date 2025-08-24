@@ -19,97 +19,97 @@ void createDeque(Deque* deque);
 
 // Insertation functions
 // Deque insertFront to insert at the front of the Deque
-void insertFront(int data);
+void insertFront(Deque* deque, int data);
 
 // Deque insertRear to insert at the rear of the Deque
-void insertRear(int data);
+void insertRear(Deque* deque, int data);
 
 
 
 
 // Deletion functions
 // Deque deleteFront to delete the front of the Deque
-int deleteFront();
+int deleteFront(Deque* deque);
 
 // Deque deleteRear to delete the rear of the Deque
-int deleteRear();
+int deleteRear(Deque* deque);
 
 // Deque clear to clear the Queue
-void clear(); 
+void clear(Deque* deque); 
 
 
 
 
 // Search functions
 // Deque getFront to get the front of the Deque
-int getFront();
+int getFront(Deque* deque);
 
 // Deque getRear to get the rear of the Deque
-int getRear();
+int getRear(Deque* deque);
 
 // Deque getMiddle to get the middle element of the Deque
-public int getMiddle();
+public int getMiddle(Deque* deque);
 
 // Deque isFound function to check is the element found
-bool isFound(int data);
+bool isFound(Deque* deque, int data);
 
 // Deque getIndex function to get the index of specific element
-int getIndex(int element);
+int getIndex(Deque* deque, int element);
 
 // Deque getElement function to get an element in specific index
-int getElement(int index);
+int getElement(Deque* deque, int index);
 
 // Deque isFull to check is the Queue is full or not
-bool isFull();
+bool isFull(Deque* deque);
 
 // Deque isEmpty to check is the Queue is Empty or not
-bool isEmpty();
+bool isEmpty(Deque* deque);
 
 
 
 
 // Stats functions
 // Deque getSize to get the size of the Queue
-int getSize();
+int getSize(Deque* deque);
 
 // Deque sum function to get the sum of the Queue
-int sum();
+int sum(Deque* deque);
 
 // Deque average function to get the average of the Queue
-float average();
+float average(Deque* deque);
 
 // Deque repeated function to return number of repetion of num in the Queue
-int repeated(int data);
+int repeated(Deque* deque, int data);
 
 // Deque max function to return the maxmuim num
-int max();
+int max(Deque* deque);
 
 // Deque min function to return the minimuim num
-int min();
+int min(Deque* deque);
 
 
 
 //Utilities functions
 // Deque printDeque function to print all the Queue elements
-void printDeque();
+void printDeque(Deque* deque);
 
 // Deque removeDuplicates function to remove the duplictaes in the Queue
-void removeDuplicates();
+void removeDuplicates(Deque* deque);
 
 // Deque reverse function to reverse the Queue
-void reverse();
+void reverse(Deque* deque);
 
 // Deque sort function to sort the Queue
-void sort();
+void sort(Deque* deque);
 
 // Deque randomize to randomize the Queue
-void randomize();
+void randomize(Deque* deque);
 
 // Deque swapData to swap two elements in the Queue
-void swapData(int data1, int data2);
+void swapData(Deque* deque, int data1, int data2);
 
 // Deque swapIndex to swap the elements in the given index in the Queue
-void swapIndex(int index1, int index2);
+void swapIndex(Deque* deque, int index1, int index2);
 
 
 
